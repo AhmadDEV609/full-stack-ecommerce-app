@@ -1,0 +1,66 @@
+.stripeCheckoutBox {
+    width: 100%;
+    margin-top: 15px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #eee;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* CARD WRAPPER */
+.stripeCardWrapper {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fafafa;
+    transition: 0.25s;
+}
+
+.stripeCardWrapper:focus-within {
+    border-color: #ff0000;
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.15);
+}
+
+/* STRIPE INPUT INSIDE */
+.StripeElement {
+    padding: 10px;
+}
+
+/* PAY BUTTON */
+.stripePayButton {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ff0000, #d10000);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.stripePayButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(255, 0, 0, 0.25);
+}
+
+.stripePayButton:active {
+    transform: scale(0.98);
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+    .stripeCheckoutBox {
+        padding: 14px;
+    }
+
+    .stripePayButton {
+        font-size: 14px;
+        padding: 12px;
+    }
+}

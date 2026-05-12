@@ -1,0 +1,117 @@
+.admin-orders {
+    padding: 20px;
+    background: #f6f7fb;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.order-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    transition: 0.2s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-2px);
+}
+
+.order-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.card-box {
+    background: #f9fafc;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.card-box h4 {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+.card-box p {
+    font-weight: 600;
+}
+
+.card-box span {
+    font-size: 12px;
+    color: #666;
+}
+
+.total-box h3 {
+    color: #16a34a;
+}
+
+.order-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.status-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.status-pill.pending {
+    background: #f59e0b;
+}
+
+.status-pill.processing {
+    background: #3b82f6;
+}
+
+.status-pill.shipped {
+    background: #8b5cf6;
+}
+
+.status-pill.delivered {
+    background: #22c55e;
+}
+
+.status-pill.cancelled {
+    background: #ef4444;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table th {
+    text-align: left;
+    background: #f1f5f9;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.order-table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.loading-small {
+    font-size: 12px;
+    color: #555;
+}

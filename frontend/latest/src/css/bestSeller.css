@@ -1,0 +1,232 @@
+.bst-wrapper-slider {
+    width: 100%;
+    padding: 35px 15px;
+    background: #f8fafc;
+    overflow: hidden;
+}
+
+.bst-wrapper-slider .slick-slide {
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex !important;
+    justify-content: center;
+}
+
+.bst-wrapper-slider .slick-list {
+    margin: 0 -10px;
+}
+
+.bst-professional-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    justify-content: center;
+}
+
+.bst-professional-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.35s ease;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08);
+    position: relative;
+    width: 240px;
+    height: 320px;
+    border: 1px solid #ececec;
+}
+
+.bst-professional-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+}
+
+.bst-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: #f4f4f4;
+    overflow: hidden;
+}
+
+.bst-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.bst-professional-card:hover .bst-main-image {
+    transform: scale(1.06);
+}
+
+.bst-top-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    z-index: 2;
+}
+
+.bst-product-details {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bst-product-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.4;
+    min-height: 42px;
+    overflow: hidden;
+}
+
+.bst-product-price {
+    font-size: 18px;
+    font-weight: 800;
+    color: #ff0000;
+}
+
+.bst-product-category {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.bst-wrapper-slider .slick-dots li button:before {
+    font-size: 10px;
+    color: #cbd5e1;
+    opacity: 1;
+}
+
+.bst-wrapper-slider .slick-dots li.slick-active button:before {
+    color: #fe0000;
+}
+
+.bst-wrapper-slider .slick-prev,
+.bst-wrapper-slider .slick-next {
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+}
+
+.bst-wrapper-slider .slick-prev:before,
+.bst-wrapper-slider .slick-next:before {
+    font-size: 36px;
+    color: #1e293b;
+    opacity: 0.8;
+}
+
+.bst-wrapper-slider .slick-prev:hover:before,
+.bst-wrapper-slider .slick-next:hover:before {
+    color: #ff0000;
+    opacity: 1;
+}
+
+@media (max-width: 1024px) {
+    .bst-professional-card {
+        width: 220px;
+        height: 300px;
+    }
+
+    .bst-image-wrapper {
+        height: 165px;
+    }
+
+    .bst-product-title {
+        font-size: 14px;
+    }
+
+    .bst-product-price {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bst-wrapper-slider {
+        padding: 25px 10px;
+    }
+
+    .bst-wrapper-slider .slick-slide {
+        padding: 8px;
+    }
+
+    .bst-professional-card {
+        width: 200px;
+        height: 285px;
+    }
+
+    .bst-image-wrapper {
+        height: 150px;
+    }
+
+    .bst-product-details {
+        padding: 12px;
+    }
+
+    .bst-product-title {
+        font-size: 14px;
+        min-height: 38px;
+    }
+
+    .bst-product-price {
+        font-size: 16px;
+    }
+
+    .bst-top-badge {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bst-wrapper-slider {
+        padding: 20px 5px;
+    }
+
+    .bst-wrapper-slider .slick-slide {
+        padding: 5px;
+    }
+
+    .bst-professional-card {
+        width: 170px;
+        height: 255px;
+        border-radius: 12px;
+    }
+
+    .bst-image-wrapper {
+        height: 125px;
+    }
+
+    .bst-product-details {
+        padding: 10px;
+        gap: 6px;
+    }
+
+    .bst-product-title {
+        font-size: 13px;
+        min-height: 34px;
+    }
+
+    .bst-product-price {
+        font-size: 15px;
+    }
+
+    .bst-product-category {
+        font-size: 11px;
+    }
+
+    .bst-wrapper-slider .slick-prev,
+    .bst-wrapper-slider .slick-next {
+        display: none !important;
+    }
+}

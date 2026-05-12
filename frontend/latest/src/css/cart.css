@@ -1,0 +1,252 @@
+.cart-prof-page {
+    background: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cart-prof-container {
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.cart-prof-items {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cart-prof-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 18px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.cart-prof-img {
+    width: 170px;
+    height: 170px;
+    object-fit: contain;
+    background: #fff;
+}
+
+.cart-prof-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cart-prof-info h4 {
+    font-size: 1rem;
+    color: #0f1111;
+    font-weight: 500;
+}
+
+.cart-prof-info p {
+    color: #565959;
+    font-size: 0.85rem;
+}
+
+.cart-prof-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.cart-prof-btn {
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.cart-prof-increase {
+    background: #ff0000;
+    color: white;
+}
+
+.cart-prof-decrease {
+    background: #d32f2f;
+    color: white;
+}
+
+.cart-prof-btn:last-child {
+    background: #b71c1c;
+    color: white;
+}
+
+.cart-prof-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.cart-prof-total {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #B12704;
+    min-width: 100px;
+    text-align: right;
+}
+
+.cart-prof-summary {
+    flex: 1;
+    background: white;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    padding: 22px;
+    position: sticky;
+    top: 20px;
+}
+
+.cart-prof-summary-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #111;
+}
+
+.cart-prof-summary-total {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #B12704;
+}
+
+.cart-prof-checkout-btn {
+    width: 100%;
+    background: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 13px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cart-prof-checkout-btn:hover {
+    background: #d60000;
+}
+
+.cart-prof-checkout-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cart-prof-empty {
+    background: white;
+    padding: 50px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+}
+
+@media (max-width: 992px) {
+
+    .cart-prof-container {
+        flex-direction: column;
+    }
+
+    .cart-prof-summary {
+        width: 100%;
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .cart-prof-page {
+        padding: 12px;
+    }
+
+    .cart-prof-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .cart-prof-info {
+        align-items: center;
+    }
+
+    .cart-prof-img {
+        width: 100%;
+        max-width: 240px;
+        height: 220px;
+    }
+
+    .cart-prof-total {
+        text-align: center;
+        width: 100%;
+    }
+
+    .cart-prof-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cart-prof-summary {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .cart-prof-card {
+        padding: 15px;
+        gap: 15px;
+        align-items: center;
+        text-align: center;
+        margin-left: 50px;
+    }
+
+    .cart-prof-info {
+        align-items: center;
+    }
+
+    .cart-prof-info h4 {
+        font-size: 0.95rem;
+    }
+
+    .cart-prof-info p {
+        font-size: 0.82rem;
+    }
+
+    .cart-prof-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .cart-prof-total {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .cart-prof-summary-title {
+        font-size: 1rem;
+    }
+
+    .cart-prof-summary-total {
+        font-size: 0.95rem;
+    }
+
+    .cart-prof-checkout-btn {
+        padding: 11px;
+        font-size: 0.9rem;
+    }
+}
