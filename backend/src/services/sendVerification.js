@@ -7,15 +7,15 @@ const sendVerificationEmail = async (email, token) => {
             port: 587,
             secure: false,
             auth: {
-                user: "ahmad.dev6635@gmail.com",
-                pass: "wvpauugukhcposbx"
+                user: process.env.EMAIL_VERIFICATION,
+                pass: process.env.EMAIL_VERIFICATION_PASSWORD
             }
         });
 
         const Email = `${process.env.FRONTEND_URL}/Email-Verification/${token}`;
 
         const mailOptions = {
-            from: 'ahmad.dev6635@gmail.com',
+            from: process.env.EMAIL_VERIFICATION,
             to: email,
             subject: 'Email Verification',
             html: `

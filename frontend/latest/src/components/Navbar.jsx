@@ -140,6 +140,7 @@ const Navbar = () => {
                                     className="navbar-logout-btn"
                                     onClick={async () => {
                                         await fetch("http://localhost:5000/v1/api/user/logout", {
+                                            method: 'POST',
                                             credentials: "include",
                                         });
                                         window.location.reload();
