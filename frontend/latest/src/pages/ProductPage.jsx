@@ -122,7 +122,7 @@ const ProductPage = () => {
                                 <div className="pd-card" key={item._id}>
 
                                     <img
-                                        src={`http://localhost:5000/public/images/${item.thumbnail}`}
+                                        src={`${apiURL}/public/images/${item.thumbnail}`}
                                         alt={item.name}
                                     />
 

@@ -252,7 +252,7 @@ const ProductDetailpage = () => {
                         product?.gallery.map((element) => {
                             return (
                                 <>
-                                    <img className={` gallery-image  ${galleryImages == element ? 'active' : ''}`} onClick={() => setgalleryImages(element)} src={`http://localhost:5000/public/images/${element}`} />
+                                    <img className={` gallery-image  ${galleryImages == element ? 'active' : ''}`} onClick={() => setgalleryImages(element)} src={`${apiURL}/public/images/${element}`} />
                                 </>
                             )
                         })
@@ -295,7 +295,7 @@ const ProductDetailpage = () => {
                     product?.gallery.map((element) => {
                         return (
                             <>
-                                <img className={` gallery-image  ${galleryImages == element ? 'active' : ''}`} onClick={() => setgalleryImages(element)} src={`http://localhost:5000/public/images/${element}`} />
+                                <img className={` gallery-image  ${galleryImages == element ? 'active' : ''}`} onClick={() => setgalleryImages(element)} src={`${apiURL}/public/images/${element}`} />
                             </>
                         )
                     })
@@ -365,7 +365,7 @@ const ProductDetailpage = () => {
                         >
                             <div className="related-card">
                                 <img
-                                    src={`http://localhost:5000/public/images/${item.thumbnail}`}
+                                    src={`${apiURL}/public/images/${item.thumbnail}`}
                                     alt=""
                                 />
                                 <h4>{item.name}</h4>
