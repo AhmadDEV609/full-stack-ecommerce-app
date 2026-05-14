@@ -17,8 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 const allowedOrigins = [
-    "http://localhost:5173",
-    "https://full-stack-ecommerce-app-client-three.vercel.app"
+    "http://localhost:5173"
 ];
 
 app.use(cors({
@@ -26,7 +25,6 @@ app.use(cors({
 
         console.log("Request Origin:", origin);
 
-        // postman/mobile requests
         if (!origin) {
             return callback(null, true);
         }
