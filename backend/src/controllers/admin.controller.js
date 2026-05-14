@@ -2,7 +2,7 @@ import adminProducts from "../models/adminproduct.model.js";
 import fs from 'fs/promises';
 import { v4 as uuidv4 } from 'uuid';
 import asyncHandler from "../utils/asyncHandler.js";
-
+import dbconnection from "../db/dbconnection.js";
 
 const createProduct = asyncHandler(async (req, res, next) => {
     const { name, description, price, catagory, istopSeller, sizes, stock, brand } = req.body
@@ -28,6 +28,7 @@ const createProduct = asyncHandler(async (req, res, next) => {
 
 
 const displayProduct = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const data = await adminProducts.find({}).limit(8)
 
     res.status(200).send({ message: "Products are here", data })
