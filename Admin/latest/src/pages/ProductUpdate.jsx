@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../css/updateProduct.css'
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const ProductUpdate = () => {
 
     const [form, setForm] = useState({
@@ -12,7 +12,7 @@ const ProductUpdate = () => {
         thumbnail: '',
         gallery: []
     })
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const { id } = useParams()
 
     useEffect(() => {

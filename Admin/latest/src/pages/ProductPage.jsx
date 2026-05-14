@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/productpage.css';
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const ProductPage = () => {
     const [form, setForm] = useState({
         name: '',
@@ -14,7 +14,7 @@ const ProductPage = () => {
         brand: '',
         sizes: ''
     });
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
 
     function handleForm(e) {
         e.preventDefault();

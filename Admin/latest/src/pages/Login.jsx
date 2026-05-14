@@ -2,14 +2,14 @@ import image from '../assets/pics1.png'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../css/login.css'
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Login = () => {
     const navigate = useNavigate()
     const [form, setform] = useState({
         email: '',
         password: ''
     })
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     console.log(apiURL)
 
     function handlesubmit(e) {

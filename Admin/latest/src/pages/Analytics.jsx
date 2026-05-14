@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../css/analytics.css";
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Analytics = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const fetchOrders = async () => {
         try {
             const res = await fetch(

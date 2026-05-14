@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Protected = () => {
 
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     useEffect(() => {
 
         const checkStatus = async () => {

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../css/order.css";
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Orders = () => {
 
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingId, setLoadingId] = useState(null);
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const fetchOrders = async () => {
         try {
             setLoading(true);

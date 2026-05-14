@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../css/admin.css';
 import { Link } from 'react-router-dom';
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Admin = () => {
     const [products, setProducts] = useState([]);
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const fetchProducts = async () => {
         try {
             const res = await fetch(`${apiURL}/v1/api/admin/product/display`);
