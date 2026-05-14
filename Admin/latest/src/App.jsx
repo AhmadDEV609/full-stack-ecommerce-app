@@ -8,7 +8,7 @@ const Admin = lazy(() => import('./pages/Admin'))
 const Analytics = lazy(() => import('./pages/Analytics'))
 const ProductPage = lazy(() => import('./pages/ProductPage'))
 const Orders = lazy(() => import('./pages/Orders'))
-const ProductUpdate = lazy(() => import('./pages/productUpdate'))
+const ProductUpdate = lazy(() => import('./pages/ProductUpdate'))
 
 const Loader = () => (
   <div className="flex justify-center items-center h-screen">
