@@ -66,7 +66,7 @@ const Wishlist = () => {
     })
 
     if (isLoading) return <p>Loading...</p>
-    if (isError) return <p>Error loading wishlist</p>
+    if (isError) return <p>Error loading</p>
 
     return (
         <div className="wishlist-page">
