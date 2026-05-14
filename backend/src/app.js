@@ -10,36 +10,16 @@ import error from "./middleware/error.middleware.js";
 
 const app = express();
 
-
-const allowedOrigins = [
-    "https://full-stack-ecommerce-app-pied.vercel.app",
-    "https://full-stack-ecommerce-t3vrrko6v-ahmad-s-projects20.vercel.app",
-    process.env.ADMIN_URL
-].filter(Boolean);
-
-app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-
-        if (allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        } else {
-            console.log("Blocked CORS origin:", origin);
-            return callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true,
-}));
-
-app.options("*", cors());
-
 app.use("/webhook", express.raw({ type: "application/json" }));
 
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+}));
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
