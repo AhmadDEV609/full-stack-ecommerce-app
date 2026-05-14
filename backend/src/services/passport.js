@@ -6,7 +6,7 @@ import User from '../models/user.model.js'
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/v1/api/user/google/callback"
+    callbackURL: `https://full-stack-ecommerce-app-production-e673.up.railway.app/v1/api/user/google/callback`
 },
     async (accessToken, refreshToken, profile, done) => {
         try {
