@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 const Resetemail = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:5000/v1/api/user/reset", {
+            const response = await fetch(`${apiURL}/v1/api/user/reset`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

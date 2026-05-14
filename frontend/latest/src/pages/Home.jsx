@@ -8,14 +8,15 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 
 export const fetchProduct = async () => {
-    const res = await fetch('http://localhost:5000/v1/api/admin/product/ourProducts')
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
+    const res = await fetch(`${apiURL}/v1/api/admin/product/ourProducts`)
     if (!res.ok) throw new Error('product is not fetch')
     const data = await res.json()
     return data
 }
 
 const Home = () => {
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ['products'],
         queryFn: fetchProduct,
@@ -46,7 +47,7 @@ const Home = () => {
                         <div className='product-card' key={product._id}>
                             <Link className='link' to={`/product-detail/${product._id}`}>
                                 <img
-                                    src={`http://localhost:5000/public/images/${product.thumbnail}`}
+                                    src={`${apiURL}/public/images/${product.thumbnail}`}
                                     alt={product.name}
                                     className='product-image'
                                 />

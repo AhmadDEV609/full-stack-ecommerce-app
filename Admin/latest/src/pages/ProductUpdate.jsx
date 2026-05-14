@@ -12,13 +12,13 @@ const ProductUpdate = () => {
         thumbnail: '',
         gallery: []
     })
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const { id } = useParams()
 
     useEffect(() => {
         const getSingleproduct = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/v1/api/Admin/product/singleproduct/${id}`)
+                const res = await fetch(`${apiURL}/v1/api/Admin/product/singleproduct/${id}`)
                 const data = await res.json()
                 setForm(data.product)
             } catch (error) {
@@ -44,7 +44,7 @@ const ProductUpdate = () => {
 
         const updatebtn = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/v1/api/admin/product/update/${id}`, {
+                const res = await fetch(`${apiURL}/v1/api/admin/product/update/${id}`, {
                     method: 'PUT',
                     body: formData
                 })

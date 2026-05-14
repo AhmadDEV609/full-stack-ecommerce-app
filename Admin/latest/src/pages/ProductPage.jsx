@@ -14,6 +14,7 @@ const ProductPage = () => {
         brand: '',
         sizes: ''
     });
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
 
     function handleForm(e) {
         e.preventDefault();
@@ -36,7 +37,7 @@ const ProductPage = () => {
 
         const sendData = async () => {
             try {
-                const res = await fetch('http://localhost:5000/v1/api/admin/product/create', {
+                const res = await fetch(`${apiURL}/v1/api/admin/product/create`, {
                     method: 'POST',
                     body: formData,
                     credentials: 'include'

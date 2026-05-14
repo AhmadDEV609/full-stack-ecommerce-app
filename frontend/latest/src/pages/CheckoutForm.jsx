@@ -4,7 +4,7 @@ import "../css/payment.css";
 const CheckoutForm = ({ clientSecret, orderId }) => {
     const stripe = useStripe();
     const elements = useElements();
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const handlePay = async () => {
         if (!stripe || !elements) return;
 
@@ -24,7 +24,7 @@ const CheckoutForm = ({ clientSecret, orderId }) => {
 
         if (paymentIntent?.status === "succeeded") {
 
-            const res = await fetch("http://localhost:5000/v1/api/order/mark-paid", {
+            const res = await fetch(`${apiURL}/v1/api/order/mark-paid`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",

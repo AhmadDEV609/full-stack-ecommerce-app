@@ -6,7 +6,8 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import '../css/bestSeller.css'
 export const fetchProducts = async () => {
-    const res = await fetch('http://localhost:5000/v1/api/admin/product/bestSeller')
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
+    const res = await fetch(`${apiURL}/v1/api/admin/product/bestSeller`)
     if (!res.ok) throw new Error('Products is not fetch')
     const data = await res.json();
     return data;

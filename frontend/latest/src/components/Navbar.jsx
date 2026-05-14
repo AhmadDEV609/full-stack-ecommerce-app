@@ -11,13 +11,14 @@ import { Link } from 'react-router-dom';
 import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const [toggle, setToggle] = useState(false);
 
 
     const userQuery = useQuery({
         queryKey: ["user"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/v1/api/user/status", {
+            const res = await fetch(`${apiURL}/v1/api/user/status`, {
                 credentials: "include",
             });
             return res.json();
@@ -28,7 +29,7 @@ const Navbar = () => {
     const cartQuery = useQuery({
         queryKey: ["cart"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/v1/api/cart/display", {
+            const res = await fetch(`${apiURL}/v1/api/cart/display`, {
                 credentials: "include",
             });
             return res.json();
@@ -40,7 +41,7 @@ const Navbar = () => {
     const wishlistQuery = useQuery({
         queryKey: ["wishlist"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/v1/api/wishlist", {
+            const res = await fetch(`${apiURL}/v1/api/wishlist`, {
                 credentials: "include",
             });
             return res.json();
@@ -139,7 +140,7 @@ const Navbar = () => {
                                 <button
                                     className="navbar-logout-btn"
                                     onClick={async () => {
-                                        await fetch("http://localhost:5000/v1/api/user/logout", {
+                                        await fetch(`${apiURL}/v1/api/user/logout`, {
                                             method: 'POST',
                                             credentials: "include",
                                         });
@@ -158,13 +159,12 @@ const Navbar = () => {
                         </div>
                     )}
 
-                    {/* ❤️ WISHLIST */}
+
                     <Link to={'/wishlist'} className='link'>
                         <FaHeart size={24} className="wishlist-icon" />
                         {wishlistCount}
                     </Link>
 
-                    {/* 🛒 CART */}
                     <Link to={'/Cart'} className='link'>
                         <FaShoppingCart size={24} className="cart-icon" />
                         {cartCount}

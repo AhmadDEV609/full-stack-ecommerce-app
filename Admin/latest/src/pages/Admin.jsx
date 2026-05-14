@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const Admin = () => {
     const [products, setProducts] = useState([]);
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const fetchProducts = async () => {
         try {
-            const res = await fetch('http://localhost:5000/v1/api/admin/product/display');
+            const res = await fetch(`${apiURL}/v1/api/admin/product/display`);
 
             if (!res.ok) {
                 console.log('API error:', res.status);
@@ -30,7 +30,7 @@ const Admin = () => {
 
     async function deletebtn(id) {
         try {
-            const res = await fetch(`http://localhost:5000/v1/api/admin/product/delete/${id}`, {
+            const res = await fetch(`${apiURL}/v1/api/admin/product/delete/${id}`, {
                 method: 'DELETE'
             });
 
@@ -66,7 +66,7 @@ const Admin = () => {
                     <div key={item._id} className="row">
 
                         <img
-                            src={`http://localhost:5000/public/images/${item.thumbnail}`}
+                            src={`${apiURL}/public/images/${item.thumbnail}`}
                             alt={item.name}
                             className="row-img"
                         />

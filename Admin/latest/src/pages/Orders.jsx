@@ -6,13 +6,13 @@ const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingId, setLoadingId] = useState(null);
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const fetchOrders = async () => {
         try {
             setLoading(true);
 
             const res = await fetch(
-                "http://localhost:5000/v1/api/order/all",
+                `${apiURL}/v1/api/order/all`,
                 { credentials: "include" }
             );
 
@@ -37,7 +37,7 @@ const Orders = () => {
             setLoadingId(id);
 
             await fetch(
-                `http://localhost:5000/v1/api/order/status/${id}`,
+                `${apiURL}/v1/api/order/status/${id}`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
@@ -72,7 +72,7 @@ const Orders = () => {
             {orders.map(order => (
                 <div key={order._id} className="order-card">
 
-                    {/* TOP SECTION */}
+
                     <div className="order-grid">
 
                         <div className="card-box">
@@ -95,7 +95,7 @@ const Orders = () => {
 
                     </div>
 
-                    {/* STATUS BAR */}
+
                     <div className="order-status">
 
                         <div className={`status-pill ${order.status}`}>
@@ -122,7 +122,6 @@ const Orders = () => {
 
                     </div>
 
-                    {/* ITEMS TABLE */}
                     <div className="table-wrapper">
 
                         <table className="order-table">

@@ -7,11 +7,11 @@ import { ToastContainer, toast } from "react-toastify";
 const Cart = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const { data, isLoading, isError } = useQuery({
         queryKey: ["cart"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/v1/api/cart/display", {
+            const res = await fetch(`${apiURL}/v1/api/cart/display`, {
                 credentials: "include",
             });
             return res.json();
@@ -24,8 +24,8 @@ const Cart = () => {
         mutationFn: async ({ id, type }) => {
             const url =
                 type === "increase"
-                    ? `http://localhost:5000/v1/api/cart/quantityIncrease/${id}`
-                    : `http://localhost:5000/v1/api/cart/quantityDecrease/${id}`;
+                    ? `${apiURL}/v1/api/cart/quantityIncrease/${id}`
+                    : `${apiURL}/v1/api/cart/quantityDecrease/${id}`;
 
             await fetch(url, {
                 method: "PUT",
@@ -79,7 +79,7 @@ const Cart = () => {
 
     const removeItem = useMutation({
         mutationFn: async (id) => {
-            await fetch(`http://localhost:5000/v1/api/cart/delete/${id}`, {
+            await fetch(`${apiURL}/v1/api/cart/delete/${id}`, {
                 method: "DELETE",
                 credentials: "include",
             });
@@ -141,7 +141,7 @@ const Cart = () => {
 
                                 <img
                                     className="cart-prof-img"
-                                    src={`http://localhost:5000/public/images/${item.product.thumbnail}`}
+                                    src={`${apiURL}/public/images/${item.product.thumbnail}`}
                                     alt={item.product.name}
                                 />
 

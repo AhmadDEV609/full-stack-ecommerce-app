@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 const ResetPasswordpage = () => {
     const { token } = useParams();
     const navigate = useNavigate();
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
@@ -12,7 +12,7 @@ const ResetPasswordpage = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:5000/v1/api/user/newPassword/${token}`, {
+            const response = await fetch(`${apiURL}/v1/api/user/newPassword/${token}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

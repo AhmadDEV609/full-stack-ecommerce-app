@@ -8,11 +8,11 @@ const Wishlist = () => {
 
     const queryClient = useQueryClient()
 
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const { data, isLoading, isError } = useQuery({
         queryKey: ["wishlist"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/v1/api/wishlist", {
+            const res = await fetch(`${apiURL}/v1/api/wishlist`, {
                 credentials: "include"
             })
             return res.json()
@@ -25,7 +25,7 @@ const Wishlist = () => {
     const removeMutation = useMutation({
         mutationFn: async (id) => {
             const res = await fetch(
-                `http://localhost:5000/v1/api/wishlist/delete/${id}`,
+                `${apiURL}/v1/api/wishlist/delete/${id}`,
                 {
                     method: "DELETE",
                     credentials: "include"
@@ -84,7 +84,7 @@ const Wishlist = () => {
 
                             <img
                                 className="wishlist-img"
-                                src={`http://localhost:5000/public/images/${item.product.thumbnail}`}
+                                src={`${apiURL}/public/images/${item.product.thumbnail}`}
                                 alt={item.product.name}
                             />
 

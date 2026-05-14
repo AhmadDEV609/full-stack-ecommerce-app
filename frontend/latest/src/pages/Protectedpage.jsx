@@ -2,11 +2,11 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 const ProtectedPage = () => {
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const { data, isLoading } = useQuery({
         queryKey: ["user"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/v1/api/user/status", {
+            const res = await fetch(`${apiURL}/v1/api/user/status`, {
                 credentials: "include",
             });
             return res.json();

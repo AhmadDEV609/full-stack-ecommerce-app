@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useForm } from "react-hook-form";
 const Signup = () => {
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const {
         register,
         handleSubmit,
@@ -16,7 +16,7 @@ const Signup = () => {
 
         const signupData = async () => {
             try {
-                const res = await fetch('http://localhost:5000/v1/api/user/signup', {
+                const res = await fetch(`${apiURL}/v1/api/user/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(form)

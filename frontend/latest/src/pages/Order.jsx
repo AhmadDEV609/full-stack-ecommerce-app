@@ -25,11 +25,11 @@ const Order = () => {
     const [clientSecret, setClientSecret] = useState(null);
     const [orderId, setOrderId] = useState(null);
     const [showStripe, setShowStripe] = useState(false);
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const { data, isLoading } = useQuery({
         queryKey: ["cart"],
         queryFn: async () => {
-            const res = await fetch("http://localhost:5000/v1/api/cart/display", {
+            const res = await fetch(`${apiURL}/v1/api/cart/display`, {
                 credentials: "include",
             });
             return res.json();
@@ -50,7 +50,7 @@ const Order = () => {
     const handleCOD = async () => {
         if (!items.length) return toast.error("Cart empty");
 
-        const res = await fetch("http://localhost:5000/v1/api/order/add", {
+        const res = await fetch(`${apiURL}/v1/api/order/add`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -77,7 +77,7 @@ const Order = () => {
     const handleStripeFlow = async () => {
         if (!items.length) return toast.error("Cart empty");
 
-        const orderRes = await fetch("http://localhost:5000/v1/api/order/add", {
+        const orderRes = await fetch(`${apiURL}/v1/api/order/add`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -95,7 +95,7 @@ const Order = () => {
 
         setOrderId(orderData.order._id);
 
-        const stripeRes = await fetch("http://localhost:5000/v1/api/order/create", {
+        const stripeRes = await fetch(`${apiURL}/v1/api/order/create`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

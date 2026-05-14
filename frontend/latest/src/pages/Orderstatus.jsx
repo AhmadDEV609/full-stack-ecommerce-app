@@ -3,12 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import "../css/orderstatus.css";
 
 const Orderstatus = () => {
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const { data, isLoading, isError } = useQuery({
         queryKey: ["orders"],
         queryFn: async () => {
             const res = await fetch(
-                "http://localhost:5000/v1/api/order/user/order",
+                `${apiURL}/v1/api/order/user/order`,
                 {
                     method: "GET",
                     credentials: "include",

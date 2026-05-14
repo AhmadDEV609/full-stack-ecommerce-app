@@ -5,6 +5,7 @@ import '../css/productdetail.css'
 import { FaTrash } from "react-icons/fa"
 import { ClipLoader } from "react-spinners";
 const ProductDetailpage = () => {
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const queryClient = useQueryClient()
     const { id } = useParams()
 
@@ -16,7 +17,7 @@ const ProductDetailpage = () => {
         queryKey: ["product", id],
         queryFn: async () => {
             const res = await fetch(
-                `http://localhost:5000/v1/api/comment/display/${id}`,
+                `${apiURL}/v1/api/comment/display/${id}`,
                 { credentials: 'include' }
             )
             return res.json()
@@ -35,7 +36,7 @@ const ProductDetailpage = () => {
         enabled: !!product,
         queryFn: async () => {
             const res = await fetch(
-                `http://localhost:5000/v1/api/admin/product/relatedProducts`
+                `${apiURL}/v1/api/admin/product/relatedProducts`
             )
             const data = await res.json()
 
@@ -57,7 +58,7 @@ const ProductDetailpage = () => {
 
 
             const res = await fetch(
-                `http://localhost:5000/v1/api/comment/add`,
+                `${apiURL}/v1/api/comment/add`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -122,7 +123,7 @@ const ProductDetailpage = () => {
         mutationFn: async (reviewId) => {
             try {
                 const res = await fetch(
-                    `http://localhost:5000/v1/api/comment/delete/${product._id}/${reviewId}`,
+                    `${apiURL}/v1/api/comment/delete/${product._id}/${reviewId}`,
                     {
                         method: 'DELETE',
                         credentials: 'include'
@@ -173,7 +174,7 @@ const ProductDetailpage = () => {
         try {
             if (product?.stock > 1) {
                 const res = await fetch(
-                    'http://localhost:5000/v1/api/cart/add',
+                    `${apiURL}/v1/api/cart/add`,
                     {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -211,7 +212,7 @@ const ProductDetailpage = () => {
     async function wishlistbtn(product) {
         try {
             const res = await fetch(
-                'http://localhost:5000/v1/api/wishlist/add',
+                `${apiURL}/v1/api/wishlist/add`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -242,7 +243,7 @@ const ProductDetailpage = () => {
 
                 <img
                     className="thumbnail-image"
-                    src={`http://localhost:5000/public/images/${galleryImages}`}
+                    src={`${apiURL}/public/images/${galleryImages}`}
                     alt={product.name}
                 />
                 <div className='gallery-1'>

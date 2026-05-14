@@ -9,13 +9,14 @@ const Login = () => {
         email: '',
         password: ''
     })
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
+    console.log(apiURL)
 
     function handlesubmit(e) {
         e.preventDefault()
         const loginData = async () => {
             try {
-                const res = await fetch('http://localhost:5000/v1/api/user/login', {
+                const res = await fetch(`${apiURL}/v1/api/user/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

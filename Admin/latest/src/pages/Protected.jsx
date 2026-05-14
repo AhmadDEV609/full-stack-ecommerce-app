@@ -5,14 +5,14 @@ const Protected = () => {
 
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     useEffect(() => {
 
         const checkStatus = async () => {
 
             try {
 
-                const res = await fetch('http://localhost:5000/v1/api/user/status', {
+                const res = await fetch(`${apiURL}/v1/api/user/status`, {
                     credentials: 'include'
                 });
 

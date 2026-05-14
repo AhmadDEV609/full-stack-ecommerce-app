@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const ProductPage = () => {
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const [catagory, setCatagory] = useState('');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
@@ -43,7 +43,7 @@ const ProductPage = () => {
 
 
             const res = await fetch(
-                `http://localhost:5000/v1/api/admin/product/allProducts?${query}`
+                `${apiURL}/v1/api/admin/product/allProducts?${query}`
             );
 
             return res.json();

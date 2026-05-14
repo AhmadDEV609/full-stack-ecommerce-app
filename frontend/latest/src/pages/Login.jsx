@@ -5,10 +5,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import '../css/login.css'
 
+
 const Login = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-
+    const apiURL = import.meta.env.VITE_BACKEND_URL;
     const {
         register,
         handleSubmit,
@@ -18,7 +19,7 @@ const Login = () => {
     function handlesubmit(form) {
         const loginData = async () => {
             try {
-                const res = await fetch('http://localhost:5000/v1/api/user/login', {
+                const res = await fetch(`${apiURL}/v1/api/user/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -44,7 +45,7 @@ const Login = () => {
     }
 
     const handleGoogleLogin = () => {
-        window.location.href = "http://localhost:5000/v1/api/user/google";
+        window.location.href = `${apiURL}/v1/api/user/google`;
     }
 
     return (
