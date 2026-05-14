@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 app.use(cors({
-    origin: ["https://full-stack-ecommerce-app-pied.vercel.app", process.env.ADMIN_URL],
+    origin: ["https://full-stack-ecommerce-t3vrrko6v-ahmad-s-projects20.vercel.app/", process.env.ADMIN_URL],
     credentials: true,
 }));
 
