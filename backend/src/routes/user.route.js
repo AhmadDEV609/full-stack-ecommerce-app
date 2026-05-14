@@ -29,7 +29,7 @@ userRouter.get('/google',
 
 userRouter.get('/google/callback',
     passport.authenticate('google', {
-        failureRedirect: 'http://localhost:5173/login'
+        failureRedirect: process.env.FRONTEND_URL / login
     }),
     googleCallback
 );
