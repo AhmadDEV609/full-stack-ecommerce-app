@@ -16,16 +16,35 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://full-stack-ecommerce-app-client-three.vercel.app"
+];
+
 app.use(cors({
-    origin: [process.env.FRONTEND_URL, process.env.ADMIN_URL],
-    credentials: true,
+    origin: function (origin, callback) {
+
+        console.log("Request Origin:", origin);
+
+        // postman/mobile requests
+        if (!origin) {
+            return callback(null, true);
+        }
+
+        if (allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS blocked"));
+        }
+    },
+    credentials: true
 }));
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
+    saveUninitialized: false,
+    cookie: { secure: true, sameSite: "none", httpOnly: true }
 }));
 
 app.use(passport.initialize());

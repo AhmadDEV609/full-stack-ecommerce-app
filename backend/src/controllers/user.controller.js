@@ -76,8 +76,8 @@ const login = asyncHandler(async (req, res, next) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
+        secure: true,
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000
     });
 
@@ -91,8 +91,8 @@ const logout = asyncHandler(async (req, res) => {
     await dbconnection()
     res.clearCookie("token", {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax"
+        secure: true,
+        sameSite: "none"
     });
     res.status(200).send({ message: "User logged out successfully" })
 })
@@ -229,8 +229,8 @@ const googleCallback = asyncHandler(async (req, res) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax"
+        secure: true,
+        sameSite: "none"
     })
 
     res.redirect(process.env.FRONTEND_URL)
