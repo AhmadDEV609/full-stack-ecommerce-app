@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const ResetPasswordpage = () => {
     const { token } = useParams();
     const navigate = useNavigate();
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 

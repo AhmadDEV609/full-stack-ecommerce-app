@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import "../css/order.css";
 
 const stripePromise = loadStripe("pk_test_51TPnP07A1bE5x6fsdfjMlDLIlNLBI9WO7rSoOXQAofwL9i71S1ZvCbIaJnBa9sgaDIMaxdR34SV8p0Br9BhsJiKM00sI6V4zeF");
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Order = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate()
@@ -25,7 +25,7 @@ const Order = () => {
     const [clientSecret, setClientSecret] = useState(null);
     const [orderId, setOrderId] = useState(null);
     const [showStripe, setShowStripe] = useState(false);
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const { data, isLoading } = useQuery({
         queryKey: ["cart"],
         queryFn: async () => {

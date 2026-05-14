@@ -6,10 +6,11 @@ import { useForm } from "react-hook-form";
 import '../css/login.css'
 
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Login = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const {
         register,
         handleSubmit,

@@ -4,10 +4,11 @@ import "../css/cart.css";
 import { MdDelete } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Cart = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const { data, isLoading, isError } = useQuery({
         queryKey: ["cart"],
         queryFn: async () => {

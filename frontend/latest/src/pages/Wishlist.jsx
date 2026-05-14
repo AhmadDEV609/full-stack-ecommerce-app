@@ -3,12 +3,12 @@ import '../css/wishlist.css'
 import { FaTrash } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Wishlist = () => {
 
     const queryClient = useQueryClient()
 
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const { data, isLoading, isError } = useQuery({
         queryKey: ["wishlist"],
         queryFn: async () => {
@@ -51,7 +51,7 @@ const Wishlist = () => {
                     }
                 }
             })
-
+            return { previousCart };
         },
         onError: (err, id, context) => {
             queryClient.setQueryData(["wishlist"], context.previousCart);

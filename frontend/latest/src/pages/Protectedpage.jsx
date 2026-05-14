@@ -1,8 +1,9 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const ProtectedPage = () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const { data, isLoading } = useQuery({
         queryKey: ["user"],
         queryFn: async () => {

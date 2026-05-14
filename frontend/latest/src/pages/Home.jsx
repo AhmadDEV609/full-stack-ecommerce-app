@@ -7,8 +7,9 @@ import arrival from '../assets/arrival.png'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 export const fetchProduct = async () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const res = await fetch(`${apiURL}/v1/api/admin/product/ourProducts`)
     if (!res.ok) throw new Error('product is not fetch')
     const data = await res.json()

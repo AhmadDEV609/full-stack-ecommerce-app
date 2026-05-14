@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import '../css/product.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const ProductPage = () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const [catagory, setCatagory] = useState('');
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);

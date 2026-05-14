@@ -4,8 +4,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import '../css/productdetail.css'
 import { FaTrash } from "react-icons/fa"
 import { ClipLoader } from "react-spinners";
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const ProductDetailpage = () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const queryClient = useQueryClient()
     const { id } = useParams()
 

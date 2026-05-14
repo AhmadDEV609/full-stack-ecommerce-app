@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const EmailVerificationPage = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [status, setStatus] = useState("Verifying...");
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     useEffect(() => {
         const verifyUser = async () => {
             try {

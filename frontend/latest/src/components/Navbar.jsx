@@ -10,8 +10,9 @@ import {
 import { Link } from 'react-router-dom';
 import { useQuery } from "@tanstack/react-query";
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Navbar = () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const [toggle, setToggle] = useState(false);
 
 

@@ -3,8 +3,9 @@ import image from '../assets/pics1.png'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useForm } from "react-hook-form";
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Signup = () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const {
         register,
         handleSubmit,

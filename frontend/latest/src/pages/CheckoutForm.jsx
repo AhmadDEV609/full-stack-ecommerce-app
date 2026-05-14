@@ -1,10 +1,11 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "../css/payment.css";
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const CheckoutForm = ({ clientSecret, orderId }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const handlePay = async () => {
         if (!stripe || !elements) return;
 

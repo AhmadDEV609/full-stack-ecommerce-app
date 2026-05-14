@@ -5,8 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import '../css/bestSeller.css'
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 export const fetchProducts = async () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const res = await fetch(`${apiURL}/v1/api/admin/product/bestSeller`)
     if (!res.ok) throw new Error('Products is not fetch')
     const data = await res.json();
@@ -70,7 +71,7 @@ const Bestseller = () => {
                                 <div className="bst-image-wrapper">
                                     <img
                                         className="bst-main-image"
-                                        src={`http://localhost:5000/public/images/${product.thumbnail}`}
+                                        src={`${apiURL}/public/images/${product.thumbnail}`}
                                         alt={product.name}
                                     />
 

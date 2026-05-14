@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Resetemail = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 

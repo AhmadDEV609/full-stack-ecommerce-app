@@ -2,8 +2,9 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import "../css/orderstatus.css";
 
+const apiURL = import.meta.env.VITE_BACKEND_URL;
 const Orderstatus = () => {
-    const apiURL = import.meta.env.VITE_BACKEND_URL;
+
     const { data, isLoading, isError } = useQuery({
         queryKey: ["orders"],
         queryFn: async () => {
