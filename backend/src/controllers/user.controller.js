@@ -5,10 +5,11 @@ import nodemailer from 'nodemailer';
 import sendVerificationEmail from '../services/sendVerification.js';
 import asyncHandler from '../utils/asyncHandler.js';
 import { sendResetPasswordEmail } from '../services/resetVerification.js';
-
+import dbconnection from '../db/dbconnection.js';
 //______________signup______________________//
 
 const signup = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { name, email, password, } = req.body
 
 
@@ -47,6 +48,7 @@ const signup = asyncHandler(async (req, res, next) => {
 //______________login______________________//
 
 const login = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { email, password } = req.body
 
     const loginData = await User.findOne({ email })
@@ -86,6 +88,7 @@ const login = asyncHandler(async (req, res, next) => {
 //______________logout______________________//
 
 const logout = asyncHandler(async (req, res) => {
+    await dbconnection()
     res.clearCookie("token", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -98,6 +101,7 @@ const logout = asyncHandler(async (req, res) => {
 //______________verification______________________//
 
 const verify = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { token } = req.params;
 
     if (!token) {
@@ -138,6 +142,7 @@ const verify = asyncHandler(async (req, res, next) => {
 //______________reset Password______________________//
 
 const resetPassword = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { email } = req.body
 
     const findEmail = await User.findOne({ email })
@@ -161,6 +166,7 @@ const resetPassword = asyncHandler(async (req, res, next) => {
 //______________change password______________________//
 
 const changePassword = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { newPassword } = req.body
     const { token } = req.params
 
@@ -203,6 +209,7 @@ const changePassword = asyncHandler(async (req, res, next) => {
 //______________status______________________//
 
 const status = asyncHandler(async (req, res) => {
+    await dbconnection()
     res.status(200).json({
         user: req.user
     });
@@ -212,6 +219,7 @@ const status = asyncHandler(async (req, res) => {
 //______________google callback______________________//
 
 const googleCallback = asyncHandler(async (req, res) => {
+    await dbconnection()
     const user = req.user
     const token = jwt.sign(
         { id: user._id, role: user.role },

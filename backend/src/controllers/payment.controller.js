@@ -1,9 +1,10 @@
 import Stripe from "stripe";
 import Order from "../models/order.model.js";
-
+import dbconnection from "../db/dbconnection.js";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const createPaymentIntent = async (req, res) => {
+    await dbconnection()
     try {
         const { orderId } = req.body;
 

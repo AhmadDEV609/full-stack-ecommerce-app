@@ -5,6 +5,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import dbconnection from "../db/dbconnection.js";
 
 const createProduct = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { name, description, price, catagory, istopSeller, sizes, stock, brand } = req.body
     if (!name || !description || !price || !catagory) {
         const err = new Error('Please fill all Fields')
@@ -96,6 +97,7 @@ const updateProduct = asyncHandler(async (req, res, next) => {
 
 
 const deleteProduct = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { id } = req.params
     const deleteLogic = await adminProducts.findByIdAndDelete(id)
     if (!deleteLogic) {
@@ -128,6 +130,7 @@ const deleteProduct = asyncHandler(async (req, res, next) => {
 
 
 const Singleproduct = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const { id } = req.params
     const product = await adminProducts.findById(id)
     if (!product) {
@@ -140,6 +143,7 @@ const Singleproduct = asyncHandler(async (req, res, next) => {
 
 
 const bestSeller = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const bestSellerData = await adminProducts.find({ istopSeller: true })
     if (!bestSellerData.length) {
         const err = new Error('No best seller found')
@@ -152,6 +156,7 @@ const bestSeller = asyncHandler(async (req, res, next) => {
 // this is for user product page 
 
 const getAllproducts = asyncHandler(async (req, res, next) => {
+    await dbconnection()
     const search = req.query.search || ''
     const page = Number(req.query.page || 1)
     const limit = Number(req.query.limit || 5)
@@ -184,6 +189,7 @@ const getAllproducts = asyncHandler(async (req, res, next) => {
 
 
 const relatedProduct = asyncHandler(async (req, res) => {
+    await dbconnection()
     const RelatedProduct = await adminProducts.find({})
     res.status(200).send({ message: 'Related product is here ', RelatedProduct })
 })
