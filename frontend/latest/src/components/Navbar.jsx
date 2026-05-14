@@ -123,7 +123,7 @@ const Navbar = () => {
 
                 <div className="Navbar-icons">
 
-                    {/* 👤 USER ICON ONLY FOR USER */}
+
                     {isUser && (
                         <div className="navbar-user-wrapper">
 
