@@ -89,6 +89,22 @@ STRIPE_PUBLIC_KEY=your key
 FRONTEND_URL=
 NODE_ENV=development
 
+# Future improvement
+
+* Implement OTP-based password reset for better security
+* Integrate production email service (SendGrid / Mailgun)
+* Improve authentication using refresh tokens
+  
+# Live links
+* Frontend:https://ecommerceapp-545.netlify.app/
+* admin panel:https://full-stack-ecommerce-app-l2kh.vercel.app/
+  
+### Demo Account:
+- **Email:** admin@gmail.com  
+- **Password:** 12345
+
+⚠️ Note:
+This is a demo admin account created only for testing purposes.
 
 ## Run Locally
 
