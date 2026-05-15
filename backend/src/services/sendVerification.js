@@ -5,8 +5,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: process.env.EMAIL_VERIFICATION,
-        pass: process.env.EMAIL_VERIFICATION_PASSWORD,
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
     },
 });
 
@@ -17,7 +17,7 @@ const sendVerificationEmail = async (email, token) => {
         const link = `${process.env.FRONTEND_URL}/Email-Verification/${token}`;
 
         const info = await transporter.sendMail({
-            from: process.env.EMAIL_VERIFICATION,
+            from: process.env.EMAIL_USER,
             to: email,
             subject: "Email Verification",
             html: `
