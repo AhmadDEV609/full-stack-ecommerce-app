@@ -69,8 +69,8 @@ const Login = () => {
                         Login with Google
                     </button>
 
-                    <Link to="/reset-mail">Forgot Password</Link>
-                    <Link to="/signup">Signup</Link>
+                    <Link style={{ color: 'black' }} to="/reset-mail">Forgot Password</Link>
+                    <Link style={{ color: 'black' }} to="/signup">Signup</Link>
 
                 </form>
             </div>

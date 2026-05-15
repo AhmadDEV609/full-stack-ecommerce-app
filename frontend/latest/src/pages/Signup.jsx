@@ -71,7 +71,7 @@ const Signup = () => {
                         Signup with Google
                     </button>
 
-                    <Link to="/login">Login</Link>
+                    <Link style={{ color: 'black' }} to="/login">Login</Link>
 
                 </form>
             </div>
