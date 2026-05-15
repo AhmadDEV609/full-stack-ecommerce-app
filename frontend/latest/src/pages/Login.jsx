@@ -69,7 +69,7 @@ const Login = () => {
                         Login with Google
                     </button>
 
-                    <Link style={{ color: 'black' }} to="/reset-mail">Forgot Password</Link>
+                    <Link style={{ color: 'black' }} to="/reset">Forgot Password</Link>
                     <Link style={{ color: 'black' }} to="/signup">Signup</Link>
 
                 </form>
