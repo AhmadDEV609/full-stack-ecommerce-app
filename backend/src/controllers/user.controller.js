@@ -155,7 +155,6 @@ export {
     login,
     logout,
     resetPassword,
-    changePassword,
     status,
     googleCallback
 }
