@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const apiURL = import.meta.env.VITE_BACKEND_URL;
+
 const Resetemail = () => {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -9,73 +10,42 @@ const Resetemail = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${apiURL}/v1/api/user/reset`, {
+            const res = await fetch(`${apiURL}/v1/api/user/reset`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email })
             });
 
-            const data = await response.json();
+            const data = await res.json();
 
-            if (response.ok) {
-                setMessage("Password reset email sent");
-                setEmail('')
+            if (res.ok) {
+                setMessage("Reset token generated (check response)");
+                console.log("RESET TOKEN:", data.resetToken);
+                setEmail("");
             } else {
-                setMessage(data.message || "Something went wrong");
+                setMessage(data.message);
             }
 
-        } catch (error) {
+        } catch (err) {
             setMessage("Server error");
         }
     };
 
     return (
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            backgroundColor: "#f4f6f8"
-        }}>
-            <form onSubmit={handleSubmit} style={{
-                padding: "30px",
-                backgroundColor: "#fff",
-                borderRadius: "10px",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                textAlign: "center"
-            }}>
-                <h2>Forgot Password</h2>
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "100px" }}>
+            <form onSubmit={handleSubmit}>
+                <h2>Reset Password</h2>
 
                 <input
                     type="email"
-                    placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    style={{
-                        padding: "10px",
-                        margin: "15px 0",
-                        width: "100%",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc"
-                    }}
+                    placeholder="Enter email"
                 />
 
-                <button type="submit" style={{
-                    padding: "10px 20px",
-                    backgroundColor: "#007bff",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: "5px",
-                    cursor: "pointer"
-                }}>
-                    Send Reset Link
-                </button>
+                <button>Generate Reset Token</button>
 
-                <p style={{ marginTop: "10px", color: "green" }}>
-                    {message}
-                </p>
+                <p>{message}</p>
             </form>
         </div>
     );

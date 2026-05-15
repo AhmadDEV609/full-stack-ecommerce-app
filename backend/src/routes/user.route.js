@@ -1,10 +1,10 @@
 import { Router } from "express";
 import {
-    signup, login, logout, verify,
+    signup, login, logout,
     resetPassword, changePassword,
     status, googleCallback
 } from "../controllers/user.controller.js";
-import sendVerificationEmail from "../services/sendVerification.js";
+
 import passport from "passport";
 import auth from "../middleware/auth.middleware.js";
 import { Limiter } from "../middleware/rate.middleware.js";
@@ -17,7 +17,8 @@ const userRouter = Router();
 userRouter.post('/signup', Limiter, signupValidation, validate, signup);
 userRouter.post('/login', Limiter, loginValidation, validate, login);
 userRouter.post('/logout', logout);
-userRouter.get('/verify/:token', verify);
+
+
 userRouter.post('/reset', Limiter, resetPassword);
 userRouter.post('/newPassword/:token', changePassword);
 
@@ -33,30 +34,5 @@ userRouter.get('/google/callback',
     }),
     googleCallback
 );
-
-
-userRouter.get("/test-email", async (req, res) => {
-    try {
-
-        await sendVerificationEmail(
-            process.env.EMAIL_USER,
-            "test-token"
-        );
-
-        res.json({
-            success: true,
-            message: "Email sent via service"
-        });
-
-    } catch (err) {
-
-        console.log(err);
-
-        res.json({
-            success: false,
-            error: err.message
-        });
-    }
-});
 
 export default userRouter;

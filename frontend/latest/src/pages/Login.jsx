@@ -1,125 +1,81 @@
 import React from 'react'
 import image from '../assets/pics1.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import '../css/login.css'
-
 
 const apiURL = import.meta.env.VITE_BACKEND_URL;
+
 const Login = () => {
-    const queryClient = useQueryClient();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors }
-    } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-    function handlesubmit(form) {
-        const loginData = async () => {
-            try {
-                const res = await fetch(`${apiURL}/v1/api/user/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(form),
-                    credentials: 'include'
-                });
+    const onSubmit = async (form) => {
+        try {
+            const res = await fetch(`${apiURL}/v1/api/user/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(form)
+            });
 
-                const data = await res.json();
-                console.log(data)
-                if (res.ok) {
-                    navigate('/');
-                    queryClient.invalidateQueries({ queryKey: ["user"] });
-                } else {
-                    console.log(data.message);
-                }
-            } catch (error) {
-                console.log(error);
+            const data = await res.json();
+
+            if (res.ok) {
+                queryClient.invalidateQueries(["user"]);
+                navigate("/");
+            } else {
+                alert(data.message);
             }
-        };
 
-        loginData();
-    }
-
-    const handleGoogleLogin = () => {
-        window.location.href = `${apiURL}/v1/api/user/google`;
-    }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <div className='continer'>
             <img className='image' src={image} alt="" />
 
             <div className='signupform'>
-                <h1>Login in to Go Cart</h1>
-                <h5 className='text'>Enter your detail below</h5>
+                <h1>Login</h1>
 
-                <form onSubmit={handleSubmit(handlesubmit)} className='form'>
+                <form onSubmit={handleSubmit(onSubmit)} className='form'>
+
                     <input
-                        {...register("email", {
-                            required: "Email is required",
-                            pattern: {
-                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: "Invalid email format"
-                            }
-                        })}
+                        {...register("email", { required: "Email required" })}
+                        placeholder="Email"
                         className='input'
-                        type="text"
-                        placeholder='Enter Email...'
                     />
-                    {errors.email && (
-                        <p style={{ color: "red", fontSize: "12px" }}>
-                            {errors.email.message}
-                        </p>
-                    )}
-
+                    {errors.email && <p>{errors.email.message}</p>}
 
                     <input
-                        {...register("password", {
-                            required: "Password is required",
-                            minLength: {
-                                value: 5,
-                                message: "Password must be at least 5 characters"
-                            }
-                        })}
-                        className='input'
+                        {...register("password", { required: "Password required" })}
                         type="password"
-                        placeholder='Enter Password...'
+                        placeholder="Password"
+                        className='input'
                     />
-                    {errors.password && (
-                        <p style={{ color: "red", fontSize: "12px" }}>
-                            {errors.password.message}
-                        </p>
-                    )}
+                    {errors.password && <p>{errors.password.message}</p>}
 
-
-                    <button className='createBtn' type='submit'>
-                        Login
-                    </button>
-
+                    <button className='createBtn'>Login</button>
 
                     <button
                         type="button"
                         className='createBtn'
-                        onClick={handleGoogleLogin}
+                        onClick={() => window.location.href = `${apiURL}/v1/api/user/google`}
                     >
                         Login with Google
                     </button>
 
-                    <Link className='link1' to={'/reset-mail'}>
-                        Forget Password
-                    </Link>
-                    <Link className='link1' to={'/signup'}>
-                        Signup
-                    </Link>
+                    <Link to="/reset-mail">Forgot Password</Link>
+                    <Link to="/signup">Signup</Link>
 
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

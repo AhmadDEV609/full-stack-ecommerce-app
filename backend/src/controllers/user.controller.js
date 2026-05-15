@@ -1,17 +1,13 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import User from '../models/user.model.js'
-import nodemailer from 'nodemailer';
-import sendVerificationEmail from '../services/sendVerification.js';
-import asyncHandler from '../utils/asyncHandler.js';
-import { sendResetPasswordEmail } from '../services/resetVerification.js';
-import dbconnection from '../db/dbconnection.js';
+import asyncHandler from '../utils/asyncHandler.js'
+import dbconnection from '../db/dbconnection.js'
+
 //______________signup______________________//
 
 const signup = asyncHandler(async (req, res, next) => {
-    const { name, email, password, } = req.body
-
-
+    const { name, email, password } = req.body
 
     const findEmail = await User.findOne({ email })
     if (findEmail) {
@@ -21,26 +17,17 @@ const signup = asyncHandler(async (req, res, next) => {
     }
 
     const hashPassword = await bcrypt.hash(password, 10)
-    const signupData = await User.create({
-        name, email,
+
+    await User.create({
+        name,
+        email,
         password: hashPassword,
-        role: 'user',
-        isVerified: false,
+        role: 'user'
     })
 
-
-
-    if (signupData.role === 'user') {
-        const verification = jwt.sign(
-            { id: signupData._id },
-            process.env.Secret_Verify_key,
-            { expiresIn: '24h' }
-        )
-        sendVerificationEmail(signupData.email, verification);
-        return res.status(201).send({ message: "User created, please verify your email" });
-    }
-
-    return res.status(201).send({ message: "Admin user is created" });
+    return res.status(201).send({
+        message: "Signup successful"
+    })
 })
 
 
@@ -56,9 +43,6 @@ const login = asyncHandler(async (req, res, next) => {
         err.status = 404
         return next(err)
     }
-    if (!loginData.isVerified) {
-        return next(new Error("Please verify your email first"))
-    }
 
     const isPasswordMatch = await bcrypt.compare(password, loginData.password)
     if (!isPasswordMatch) {
@@ -68,7 +52,11 @@ const login = asyncHandler(async (req, res, next) => {
     }
 
     const token = jwt.sign(
-        { id: loginData._id, role: loginData.role, name: loginData.name },
+        {
+            id: loginData._id,
+            role: loginData.role,
+            name: loginData.name
+        },
         process.env.Secret_Auth_key,
         { expiresIn: '1d' }
     )
@@ -78,7 +66,7 @@ const login = asyncHandler(async (req, res, next) => {
         secure: true,
         sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000
-    });
+    })
 
     res.status(200).send({ message: "Login successful" })
 })
@@ -91,116 +79,78 @@ const logout = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "none"
-    });
+    })
+
     res.status(200).send({ message: "User logged out successfully" })
 })
 
 
-//______________verification______________________//
+//______________reset password (TOKEN ONLY)______________________//
 
-const verify = asyncHandler(async (req, res, next) => {
-    await dbconnection()
-    const { token } = req.params;
+const resetPassword = asyncHandler(async (req, res) => {
 
-    if (!token) {
-        const err = new Error('Token not provided')
-        err.status = 400
-        return next(err)
-    }
-
-
-    let decoded;
-    try {
-        decoded = jwt.verify(token, process.env.Secret_Verify_key);
-    } catch (err) {
-        const error = new Error('Invalid or expired token')
-        error.status = 400
-        return next(error)
-    }
-
-    const user = await User.findById(decoded.id);
-    if (!user) {
-        const err = new Error('User not found')
-        err.status = 404
-        return next(err)
-    }
-
-    if (user.isVerified) {
-        const err = new Error('User already verified')
-        err.status = 400
-        return next(err)
-    }
-
-    user.isVerified = true;
-    await user.save();
-    res.status(200).send({ message: "User verified successfully" });
-})
-
-
-//______________reset Password______________________//
-
-const resetPassword = asyncHandler(async (req, res, next) => {
-    await dbconnection()
     const { email } = req.body
 
-    const findEmail = await User.findOne({ email })
-    if (!findEmail) {
+    const user = await User.findOne({ email })
+
+    if (!user) {
         return res.status(200).json({
-            message: "If account exists, email sent"
-        });
+            message: "If account exists, reset link available"
+        })
     }
+
     const token = jwt.sign(
-        { userId: findEmail._id },
+        { userId: user._id },
         process.env.Secret_Reset_key,
-        { expiresIn: '10min' }
+        { expiresIn: '10m' }
     )
-    sendResetPasswordEmail(email, token);
+
     return res.status(200).json({
-        message: "Reset password email sent"
+        message: "Reset token generated",
+        resetToken: token
     })
 })
 
 
 //______________change password______________________//
 
-const changePassword = asyncHandler(async (req, res, next) => {
+const changePassword = asyncHandler(async (req, res) => {
 
     const { newPassword } = req.body
     const { token } = req.params
 
-    if (!token) {
-        const err = new Error('Token not provided')
+    if (!newPassword || newPassword.length < 5) {
+        const err = new Error("Password must be at least 5 characters")
         err.status = 400
-        return next(err)
+        throw err
     }
-    if (!newPassword || newPassword.length < 6) {
-        const err = new Error("Password must be at least 6 characters");
-        err.status = 400;
-        return next(err);
-    }
-    let decodeToken;
+
+    let decoded
     try {
-        decodeToken = jwt.verify(token, process.env.Secret_Reset_key)
-    } catch (err) {
-        const error = new Error('Invalid or expired token')
-        error.status = 400
-        return next(error)
+        decoded = jwt.verify(token, process.env.Secret_Reset_key)
+    } catch {
+        const err = new Error('Invalid or expired token')
+        err.status = 400
+        throw err
     }
 
     const hashPassword = await bcrypt.hash(newPassword, 10)
-    const updatedPassword = await User.findByIdAndUpdate(
-        decodeToken.userId,
+
+    const user = await User.findByIdAndUpdate(
+        decoded.userId,
         { password: hashPassword },
         { new: true }
     )
 
-    if (!updatedPassword) {
+    if (!user) {
         const err = new Error('User not found')
         err.status = 404
-        return next(err)
+        throw err
     }
 
-    res.status(200).json({ message: "Password updated successfully" });
+    return res.status(200).json({
+        message: "Password updated successfully"
+    })
 })
 
 
@@ -209,14 +159,16 @@ const changePassword = asyncHandler(async (req, res, next) => {
 const status = asyncHandler(async (req, res) => {
     res.status(200).json({
         user: req.user
-    });
+    })
 })
 
 
 //______________google callback______________________//
 
 const googleCallback = asyncHandler(async (req, res) => {
+
     const user = req.user
+
     const token = jwt.sign(
         { id: user._id, role: user.role },
         process.env.Secret_Auth_key,
@@ -233,4 +185,12 @@ const googleCallback = asyncHandler(async (req, res) => {
 })
 
 
-export { signup, login, logout, verify, resetPassword, changePassword, status, googleCallback }
+export {
+    signup,
+    login,
+    logout,
+    resetPassword,
+    changePassword,
+    status,
+    googleCallback
+}
