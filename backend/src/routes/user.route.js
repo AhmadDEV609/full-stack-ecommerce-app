@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
     signup, login, logout,
-    resetPassword, changePassword,
+    resetPassword,
     status, googleCallback
 } from "../controllers/user.controller.js";
 
