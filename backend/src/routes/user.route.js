@@ -34,8 +34,13 @@ userRouter.get('/google/callback',
     googleCallback
 );
 
+
 userRouter.get("/test-email", async (req, res) => {
     try {
+
+        console.log("ENV CHECK:", process.env.EMAIL_USER);
+        console.log("ENV CHECK PASS:", process.env.EMAIL_PASS ? "OK" : "MISSING");
+
         const info = await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: process.env.EMAIL_USER,
@@ -43,10 +48,22 @@ userRouter.get("/test-email", async (req, res) => {
             text: "Working or not"
         });
 
-        res.json(info);
+        console.log("EMAIL INFO:", info);
+
+        return res.json({
+            success: true,
+            message: "Email sent",
+            info
+        });
+
     } catch (err) {
-        console.log(err);
-        res.json(err);
+        console.log("EMAIL ERROR:", err);
+
+        return res.json({
+            success: false,
+            error: err.message,
+            full: err
+        });
     }
 });
 
