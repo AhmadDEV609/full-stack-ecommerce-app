@@ -4,7 +4,7 @@ import adminProducts from "../models/adminproduct.model.js";
 import dbconnection from "../db/dbconnection.js";
 
 export const addCart = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const userId = req.user.id;
     const { product, quantity, size } = req.body.items[0];
 
@@ -48,7 +48,7 @@ export const addCart = asyncHandler(async (req, res) => {
 
 
 export const displayCart = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const cart = await Cart.findOne({ userId: req.user.id })
         .populate({
             path: "items.product",
@@ -78,7 +78,7 @@ export const displayCart = asyncHandler(async (req, res) => {
 
 
 export const increaseQuantity = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     await Cart.updateOne(
         { userId: req.user.id, "items.product": req.params.id },
         { $inc: { "items.$.quantity": 1 } }
@@ -92,7 +92,7 @@ export const increaseQuantity = asyncHandler(async (req, res) => {
 
 
 export const decreaseQuantity = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     await Cart.updateOne(
         { userId: req.user.id, "items.product": req.params.id, "items.quantity": { $gt: 1 } },
         { $inc: { "items.$.quantity": -1 } }
@@ -106,7 +106,7 @@ export const decreaseQuantity = asyncHandler(async (req, res) => {
 
 
 export const deleteCartitem = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     await Cart.updateOne(
         { userId: req.user.id },
         { $pull: { items: { product: req.params.id } } }

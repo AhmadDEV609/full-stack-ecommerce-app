@@ -3,7 +3,7 @@ import adminProducts from "../models/adminproduct.model.js";
 import dbconnection from "../db/dbconnection.js";
 
 export const commentAdd = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const { comment, productId } = req.body;
     await adminProducts.findByIdAndUpdate(
         productId,
@@ -23,7 +23,7 @@ export const commentAdd = asyncHandler(async (req, res) => {
 
 
 export const getSingleProduct = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const product = await adminProducts.findById(req.params.id)
         .populate({
             path: "reviews.user",
@@ -43,7 +43,7 @@ export const getSingleProduct = asyncHandler(async (req, res) => {
 
 
 export const deleteComment = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const { productId, reviewId } = req.params;
     const product = await adminProducts.findByIdAndUpdate(
         productId,

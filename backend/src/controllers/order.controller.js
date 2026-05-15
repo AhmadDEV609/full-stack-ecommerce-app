@@ -8,8 +8,6 @@ import mongoose from "mongoose";
 import dbconnection from "../db/dbconnection.js";
 
 const addOrderitem = asyncHandler(async (req, res) => {
-    await dbconnection()
-
     const session = await mongoose.startSession();
     session.startTransaction();
 
@@ -101,7 +99,7 @@ const addOrderitem = asyncHandler(async (req, res) => {
 
 
 export const getAllOrders = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const orders = await Order.find()
         .populate("userId", "name email")
         .populate("items.product")
@@ -127,7 +125,7 @@ export const getUserOrders = asyncHandler(async (req, res) => {
 // this is for admin panal 
 
 export const updateOrderStatus = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const { status } = req.body;
 
     const order = await Order.findByIdAndUpdate(
@@ -159,7 +157,7 @@ export const updateOrderStatus = asyncHandler(async (req, res) => {
 
 // this is for stripe
 export const markOrderPaid = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const { orderId, paymentIntentId } = req.body;
 
     if (!orderId) {

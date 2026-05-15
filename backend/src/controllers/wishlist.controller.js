@@ -3,7 +3,7 @@ import wishlistData from "../models/wishlist.model.js";
 import dbconnection from "../db/dbconnection.js";
 
 const addTowishlist = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     if (!req.user) {
         const err = new Error("Not logged in");
         err.status = 401;
@@ -53,7 +53,7 @@ const addTowishlist = asyncHandler(async (req, res) => {
 
 
 const deleteWishlist = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const wishlist = await wishlistData.findOne({ userid: req.user.id });
 
     if (!wishlist) {
@@ -77,7 +77,7 @@ const deleteWishlist = asyncHandler(async (req, res) => {
 
 
 const getWishlist = asyncHandler(async (req, res) => {
-    await dbconnection()
+
     const wishlist = await wishlistData
         .findOne({ userid: req.user.id })
         .populate("wishlistItem.product")
