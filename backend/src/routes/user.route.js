@@ -20,7 +20,7 @@ userRouter.post('/login', Limiter, loginValidation, validate, login);
 userRouter.post('/logout', logout);
 
 
-userRouter.post('/reset', Limiter, auth, isUser, resetPassword);
+userRouter.post('/reset', Limiter, resetPassword);
 
 
 userRouter.get('/status', auth, status);
