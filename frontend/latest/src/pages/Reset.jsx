@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { toast, ToastContainer } from "react-toastify";
 const apiURL = import.meta.env.VITE_BACKEND_URL;
 
 const Reset = () => {
 
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         try {
-
             const res = await fetch(`${apiURL}/v1/api/user/reset`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                credentials: "include",
                 body: JSON.stringify({
+                    email,
                     password
                 })
             });
@@ -30,31 +29,23 @@ const Reset = () => {
             const data = await res.json();
 
             if (res.ok) {
-
-                setMessage(data.message);
-
+                toast.success("Password is updated");
+                setEmail("");
                 setPassword("");
 
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
-
             } else {
-
                 setMessage(data.message);
-
             }
 
         } catch (err) {
-
             setMessage("Server Error");
-
         }
-
     };
 
     return (
-
         <div style={{
             display: "flex",
             justifyContent: "center",
@@ -62,6 +53,7 @@ const Reset = () => {
             height: "100vh",
             backgroundColor: "#f5f5f5"
         }}>
+            <ToastContainer />
 
             <form
                 onSubmit={handleSubmit}
@@ -80,6 +72,19 @@ const Reset = () => {
                 <h2 style={{ textAlign: "center" }}>
                     Change Password
                 </h2>
+
+                <input
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{
+                        padding: "10px",
+                        border: "1px solid #ccc",
+                        borderRadius: "5px",
+                        outline: "none"
+                    }}
+                />
 
                 <input
                     type="password"
@@ -122,9 +127,7 @@ const Reset = () => {
             </form>
 
         </div>
-
     );
-
 };
 
 export default Reset;

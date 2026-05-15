@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import '../css/productdetail.css'
 import { FaTrash } from "react-icons/fa"
 import { ClipLoader } from "react-spinners";
+import { toast, ToastContainer } from "react-toastify";
 const apiURL = import.meta.env.VITE_BACKEND_URL;
 const ProductDetailpage = () => {
 
@@ -191,7 +192,7 @@ const ProductDetailpage = () => {
                 )
 
                 if (res.ok) {
-                    alert("Product added to cart")
+                    toast.success("Product added to cart");
                     queryClient.invalidateQueries(["cart"])
                 }
             } else {
@@ -227,7 +228,8 @@ const ProductDetailpage = () => {
             )
 
             if (res.ok) {
-                alert("Product added to wishlist")
+
+                toast.success("Product added to wishlist");
                 queryClient.invalidateQueries(["wishlist"])
             }
         } catch (error) {
@@ -239,7 +241,7 @@ const ProductDetailpage = () => {
 
     return (
         <div className="product-detail-page">
-
+            <ToastContainer />
             <div className="main-container">
 
                 <img

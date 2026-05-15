@@ -88,10 +88,21 @@ const logout = asyncHandler(async (req, res) => {
 //______________reset password_________________//
 
 const resetPassword = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
 
-    const { password } = req.body;
+    if (!email || !password) {
+        return res.status(400).json({
+            message: "Email and password are required"
+        });
+    }
 
-    const user = await User.findById(req.user.id);
+    if (password.length < 5) {
+        return res.status(400).json({
+            message: "Password must be at least 5 characters"
+        });
+    }
+
+    const user = await User.findOne({ email });
 
     if (!user) {
         return res.status(404).json({
@@ -99,24 +110,14 @@ const resetPassword = asyncHandler(async (req, res) => {
         });
     }
 
-    if (!password || password.length < 5) {
-        return res.status(400).json({
-            message: "Password must be at least 5 characters"
-        });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    user.password = hashedPassword;
+    user.password = await bcrypt.hash(password, 10);
 
     await user.save();
 
     return res.status(200).json({
         message: "Password updated successfully"
     });
-
 });
-
 
 
 //______________status______________________//

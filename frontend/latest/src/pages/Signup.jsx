@@ -1,6 +1,7 @@
 import image from '../assets/pics1.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 import '../css/signup.css'
 const apiURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -20,7 +21,7 @@ const Signup = () => {
             const data = await res.json();
 
             if (res.ok) {
-                alert(data.message);
+                toast.success("Signup sucessfully");
                 reset();
                 navigate("/login");
             } else {
@@ -34,6 +35,7 @@ const Signup = () => {
 
     return (
         <div className='continer'>
+            <ToastContainer />
             <img className='image' src={image} alt="" />
 
             <div className='signupform'>
