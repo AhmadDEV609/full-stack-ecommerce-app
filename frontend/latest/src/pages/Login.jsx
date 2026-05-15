@@ -3,7 +3,7 @@ import image from '../assets/pics1.png'
 import { useNavigate, Link } from 'react-router-dom'
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import '../css/login.css'
+import '../css/signup.css'
 const apiURL = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
