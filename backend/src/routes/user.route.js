@@ -11,6 +11,7 @@ import { Limiter } from "../middleware/rate.middleware.js";
 import { signupValidation } from "../middleware/validation.js";
 import { loginValidation } from "../middleware/validation.js";
 import { validate } from "../middleware/validate.middleware.js";
+import { isUser } from "../middleware/role.check.middleware.js";
 
 const userRouter = Router();
 
@@ -19,8 +20,8 @@ userRouter.post('/login', Limiter, loginValidation, validate, login);
 userRouter.post('/logout', logout);
 
 
-userRouter.post('/reset', Limiter, resetPassword);
-userRouter.post('/newPassword/:token', changePassword);
+userRouter.post('/reset', Limiter, auth, isUser, resetPassword);
+
 
 userRouter.get('/status', auth, status);
 

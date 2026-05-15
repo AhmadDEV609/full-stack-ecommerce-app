@@ -8,9 +8,7 @@ import Protectedpage from "./pages/Protectedpage";
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
-const ResetPasswordpage = lazy(() => import("./pages/ResetPasswordpage"));
-const EmailVerificationPage = lazy(() => import("./pages/EmailverificationPage"));
-const Resetemail = lazy(() => import("./pages/Resetemail"));
+const Reset = lazy(() => import("./pages/Reset"));
 const Contact = lazy(() => import("./pages/Contact"));
 const About = lazy(() => import("./pages/About"));
 const ProductDetailpage = lazy(() => import("./pages/ProductDetailpage"));
@@ -36,9 +34,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/reset-mail" element={<Resetemail />} />
-          <Route path="/reset-Password/:token" element={<ResetPasswordpage />} />
-          <Route path="/Email-Verification/:token" element={<EmailVerificationPage />} />
+          <Route path="/reset--mail" element={<Reset />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/About" element={<About />} />
 

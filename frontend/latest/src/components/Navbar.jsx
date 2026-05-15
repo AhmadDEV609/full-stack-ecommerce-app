@@ -119,7 +119,8 @@ const Navbar = () => {
                     <li><Link className='link' to={'/Contact'}>Contact</Link></li>
                     <li><Link className='link' to={'/About'}>About</Link></li>
                     <li><Link className='link' to={'/product'}>Products</Link></li>
-
+                    <li><Link className='link' to={'/login'}>login</Link></li>
+                    <li><Link className='link' to={'/signup'}>signup</Link></li>
                 </ul>
 
                 <div className="Navbar-icons">

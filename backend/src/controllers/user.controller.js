@@ -85,73 +85,38 @@ const logout = asyncHandler(async (req, res) => {
 })
 
 
-//______________reset password (TOKEN ONLY)______________________//
+//______________reset password_________________//
 
 const resetPassword = asyncHandler(async (req, res) => {
 
-    const { email } = req.body
+    const { password } = req.body;
 
-    const user = await User.findOne({ email })
-
-    if (!user) {
-        return res.status(200).json({
-            message: "If account exists, reset link available"
-        })
-    }
-
-    const token = jwt.sign(
-        { userId: user._id },
-        process.env.Secret_Reset_key,
-        { expiresIn: '10m' }
-    )
-
-    return res.status(200).json({
-        message: "Reset token generated",
-        resetToken: token
-    })
-})
-
-
-//______________change password______________________//
-
-const changePassword = asyncHandler(async (req, res) => {
-
-    const { newPassword } = req.body
-    const { token } = req.params
-
-    if (!newPassword || newPassword.length < 5) {
-        const err = new Error("Password must be at least 5 characters")
-        err.status = 400
-        throw err
-    }
-
-    let decoded
-    try {
-        decoded = jwt.verify(token, process.env.Secret_Reset_key)
-    } catch {
-        const err = new Error('Invalid or expired token')
-        err.status = 400
-        throw err
-    }
-
-    const hashPassword = await bcrypt.hash(newPassword, 10)
-
-    const user = await User.findByIdAndUpdate(
-        decoded.userId,
-        { password: hashPassword },
-        { new: true }
-    )
+    const user = await User.findById(req.user.id);
 
     if (!user) {
-        const err = new Error('User not found')
-        err.status = 404
-        throw err
+        return res.status(404).json({
+            message: "User not found"
+        });
     }
+
+    if (!password || password.length < 5) {
+        return res.status(400).json({
+            message: "Password must be at least 5 characters"
+        });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    user.password = hashedPassword;
+
+    await user.save();
 
     return res.status(200).json({
         message: "Password updated successfully"
-    })
-})
+    });
+
+});
+
 
 
 //______________status______________________//
