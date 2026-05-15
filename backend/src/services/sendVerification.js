@@ -1,7 +1,9 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
         user: process.env.EMAIL_VERIFICATION,
         pass: process.env.EMAIL_VERIFICATION_PASSWORD,
@@ -9,6 +11,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendVerificationEmail = async (email, token) => {
+
     try {
 
         const link = `${process.env.FRONTEND_URL}/Email-Verification/${token}`;
@@ -19,18 +22,19 @@ const sendVerificationEmail = async (email, token) => {
             subject: "Email Verification",
             html: `
                 <h1>Email Verification</h1>
+
                 <p>Click below to verify your account:</p>
 
                 <a href="${link}"
-                   style="
+                    style="
                         padding:10px 20px;
                         background:green;
                         color:white;
                         text-decoration:none;
                         border-radius:5px;
                         display:inline-block;
-                   ">
-                   Verify Account
+                    ">
+                    Verify Account
                 </a>
             `,
         });
@@ -38,7 +42,9 @@ const sendVerificationEmail = async (email, token) => {
         console.log("EMAIL SENT:", info.response);
 
     } catch (error) {
+
         console.log("EMAIL ERROR:", error);
+
     }
 };
 
