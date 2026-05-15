@@ -4,7 +4,7 @@ import {
     resetPassword, changePassword,
     status, googleCallback
 } from "../controllers/user.controller.js";
-
+import sendVerificationEmail from "../services/sendVerification.js";
 import passport from "passport";
 import auth from "../middleware/auth.middleware.js";
 import { Limiter } from "../middleware/rate.middleware.js";
@@ -38,31 +38,23 @@ userRouter.get('/google/callback',
 userRouter.get("/test-email", async (req, res) => {
     try {
 
-        console.log("ENV CHECK:", process.env.EMAIL_USER);
-        console.log("ENV CHECK PASS:", process.env.EMAIL_PASS ? "OK" : "MISSING");
+        await sendVerificationEmail(
+            process.env.EMAIL_USER,
+            "test-token"
+        );
 
-        const info = await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_USER,
-            subject: "Test Email",
-            text: "Working or not"
-        });
-
-        console.log("EMAIL INFO:", info);
-
-        return res.json({
+        res.json({
             success: true,
-            message: "Email sent",
-            info
+            message: "Email sent via service"
         });
 
     } catch (err) {
-        console.log("EMAIL ERROR:", err);
 
-        return res.json({
+        console.log(err);
+
+        res.json({
             success: false,
-            error: err.message,
-            full: err
+            error: err.message
         });
     }
 });
