@@ -36,10 +36,8 @@ const signup = asyncHandler(async (req, res, next) => {
             process.env.Secret_Verify_key,
             { expiresIn: '24h' }
         )
-        setImmediate(() => {
-            sendVerificationEmail(signupData.email, verification)
-                .catch(err => console.log(err));
-        });
+        sendVerificationEmail(signupData.email, verification)
+            .catch(err => console.log("EMAIL ERROR:", err));
         return res.status(201).send({ message: "User created, please verify your email" });
     }
 
