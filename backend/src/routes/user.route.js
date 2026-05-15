@@ -34,4 +34,20 @@ userRouter.get('/google/callback',
     googleCallback
 );
 
+app.get("/test-email", async (req, res) => {
+    try {
+        const info = await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER,
+            subject: "Test Email",
+            text: "Working or not"
+        });
+
+        res.json(info);
+    } catch (err) {
+        console.log(err);
+        res.json(err);
+    }
+});
+
 export default userRouter;

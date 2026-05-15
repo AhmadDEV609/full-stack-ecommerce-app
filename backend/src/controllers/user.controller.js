@@ -36,7 +36,7 @@ const signup = asyncHandler(async (req, res, next) => {
             process.env.Secret_Verify_key,
             { expiresIn: '24h' }
         )
-        await sendVerificationEmail(signupData.email, verification);
+        sendVerificationEmail(signupData.email, verification);
         return res.status(201).send({ message: "User created, please verify your email" });
     }
 
