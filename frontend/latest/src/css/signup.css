@@ -51,9 +51,9 @@
     height: 30px;
 
     border: none;
-    /* poora box hata diya */
+
     border-bottom: 1.5px solid rgb(141, 139, 139);
-    /* sirf neeche line */
+
     outline: none;
 }
 
@@ -65,13 +65,12 @@
 }
 
 
-/* ================= RESPONSIVE DESIGN ================= */
 
-/* Tablets (768px and below) */
+
 @media (max-width: 768px) {
     .continer {
         grid-template-columns: 1fr;
-        /* ek column */
+
     }
 
     .image {
@@ -88,7 +87,6 @@
 }
 
 
-/* Mobile devices (480px and below) */
 @media (max-width: 480px) {
     .signupform {
         width: 90%;

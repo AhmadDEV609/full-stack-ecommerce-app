@@ -1,8 +1,7 @@
-import '../css/signup.css'
 import image from '../assets/pics1.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
-
+import '../css/signup.css'
 const apiURL = import.meta.env.VITE_BACKEND_URL;
 
 const Signup = () => {

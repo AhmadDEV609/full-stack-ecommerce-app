@@ -32,20 +32,55 @@ const Resetemail = () => {
     };
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "100px" }}>
-            <form onSubmit={handleSubmit}>
-                <h2>Reset Password</h2>
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            backgroundColor: "#f5f5f5"
+        }}>
+            <form onSubmit={handleSubmit} style={{
+                background: "#fff",
+                padding: "30px",
+                borderRadius: "10px",
+                boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "15px",
+                width: "300px"
+            }}>
+                <h2 style={{ textAlign: "center" }}>Reset Password</h2>
 
                 <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter email"
+                    style={{
+                        padding: "10px",
+                        border: "1px solid #ccc",
+                        borderRadius: "5px",
+                        outline: "none"
+                    }}
                 />
 
-                <button>Generate Reset Token</button>
+                <button style={{
+                    padding: "10px",
+                    backgroundColor: "red",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer"
+                }}>
+                    Forget Password
+                </button>
 
-                <p>{message}</p>
+                <p style={{
+                    textAlign: "center",
+                    color: message.includes("error") ? "red" : "green"
+                }}>
+                    {message}
+                </p>
             </form>
         </div>
     );
