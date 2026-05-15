@@ -7,8 +7,8 @@ const sendVerificationEmail = async (email, token) => {
             port: 587,
             secure: false,
             auth: {
-                user: process.env.EMAIL_VERIFICATION,
-                pass: process.env.EMAIL_VERIFICATION_PASSWORD
+                user: process.env.EMAIL,
+                pass: process.env.EMAIL_PASS
             }
         });
 
